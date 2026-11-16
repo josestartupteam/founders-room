@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>חדר המייסדים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* layout: airy single column on a warm paper ground; floating white cards, pill navigation; each screen = one stage of the idea funnel */
+  --bg:#f6f4ef;
+  --bg-2:#efece5;
+  --surface:#ffffff;
+  --ink:#1f2a30;
+  --muted:#6c7a80;
+  --line:#e8e4dc;
+  --accent:#2f7a6b;
+  --accent-ink:#ffffff;
+  --accent-soft:#e3f1ec;
+  --sky-soft:#e6eef7;
+  --warn:#9a6420;
+  --warn-soft:#fbefdc;
+  --bad:#b24b4b;
+  --bad-soft:#f9e6e4;
+  --violet-soft:#eeeafa;
+  --shadow:0 1px 2px rgba(40,35,25,.04),0 6px 22px rgba(40,35,25,.06);
+  --shadow-lift:0 2px 4px rgba(40,35,25,.05),0 14px 34px rgba(40,35,25,.09);
+  --radius:16px;
+  --display:"Rubik","Assistant",system-ui,sans-serif;
+  --body:"Assistant","Rubik",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141a1d; --bg-2:#1a2125; --surface:#1d262b; --ink:#e7ecea; --muted:#9aa7a9; --line:#2b363c;
+    --accent:#6cc4ae; --accent-ink:#0e1a17; --accent-soft:#1d3530; --sky-soft:#1d2a38;
+    --warn:#e6b072; --warn-soft:#3a2e1d; --bad:#ec9a95; --bad-soft:#3a2424; --violet-soft:#29243c;
+    --shadow:0 1px 2px rgba(0,0,0,.25),0 6px 22px rgba(0,0,0,.25);
+    --shadow-lift:0 2px 4px rgba(0,0,0,.3),0 14px 34px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141a1d; --bg-2:#1a2125; --surface:#1d262b; --ink:#e7ecea; --muted:#9aa7a9; --line:#2b363c;
+  --accent:#6cc4ae; --accent-ink:#0e1a17; --accent-soft:#1d3530; --sky-soft:#1d2a38;
+  --warn:#e6b072; --warn-soft:#3a2e1d; --bad:#ec9a95; --bad-soft:#3a2424; --violet-soft:#29243c;
+  --shadow:0 1px 2px rgba(0,0,0,.25),0 6px 22px rgba(0,0,0,.25);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.3),0 14px 34px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.3;margin:0;text-wrap:balance;letter-spacing:-.005em}
+h1{font-size:1.75rem}
+h2{font-size:1.15rem}
+h3{font-size:1.05rem}
+p{margin:0}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.top-row{max-width:1000px;margin:0 auto;padding:14px 20px 6px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--accent-soft),var(--sky-soft));display:grid;place-items:center;color:var(--accent);font-family:var(--display);font-weight:700;font-size:.95rem}
+.brand h1{font-size:1.12rem;font-weight:500}
+.brand .sub{color:var(--muted);font-size:.85rem}
+.me-btn{border:0;background:var(--surface);box-shadow:var(--shadow);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:600;font-size:.92rem}
+nav.tabs{max-width:1000px;margin:0 auto;padding:6px 16px 12px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{flex:none;padding:6px 14px;text-decoration:none;color:var(--muted);font-weight:600;border-radius:999px;white-space:nowrap;font-size:.95rem}
+nav.tabs a:hover{color:var(--ink);background:var(--bg-2)}
+nav.tabs a[aria-current="page"]{color:var(--ink);background:var(--surface);box-shadow:var(--shadow)}
+nav.tabs a .n{font-size:.75rem;color:var(--muted);margin-inline-start:6px;font-variant-numeric:tabular-nums;background:var(--bg-2);border-radius:999px;padding:0 6px}
+
+main{max-width:1000px;margin:0 auto;padding:18px 20px 90px;display:flex;flex-direction:column;gap:22px}
+.banner{border-radius:12px;padding:12px 16px;background:var(--warn-soft);color:var(--ink)}
+.view-head{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
+.view-head .lead{color:var(--muted);max-width:60ch;margin-top:6px}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+
+.card{background:var(--surface);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.list{display:flex;flex-direction:column;gap:12px}
+.section-title{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;color:var(--muted);font-size:.86rem}
+.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:2px 10px;font-size:.8rem;font-weight:600;background:var(--bg-2);color:var(--ink)}
+.chip.accent{background:var(--accent-soft)}
+.chip.sky{background:var(--sky-soft)}
+.chip.warn{background:var(--warn-soft)}
+.chip.bad{background:var(--bad-soft)}
+.chip.violet{background:var(--violet-soft)}
+.chip.ex{background:transparent;border:1px dashed var(--muted);color:var(--muted)}
+.btn{border:0;background:var(--bg-2);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:600;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 30%,transparent)}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.small{padding:4px 12px;font-size:.86rem}
+.btn.ghost{background:transparent;color:var(--muted)}
+.btn.ghost:hover{background:var(--bg-2);color:var(--ink)}
+.btn.danger{color:var(--bad)}
+.btn.armed{background:var(--bad);color:#fff}
+.btn.ai{background:var(--violet-soft)}
+.btn:disabled{opacity:.55;cursor:default}
+.row-actions{display:flex;flex-wrap:wrap;gap:6px;padding-top:4px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filters button{border:0;background:transparent;border-radius:999px;padding:5px 14px;cursor:pointer;font-weight:600;font-size:.92rem;color:var(--muted)}
+.filters button:hover{background:var(--bg-2);color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+
+.statement{font-size:1rem;color:var(--ink)}
+.statement .missing{color:var(--warn);font-weight:600}
+.empty{border-radius:var(--radius);padding:34px 22px;color:var(--muted);text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;background:color-mix(in srgb,var(--surface) 55%,transparent);border:1.5px dashed var(--line)}
+.empty p{max-width:52ch}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+.num{font-variant-numeric:tabular-nums}
+
+/* dashboard */
+.next{background:linear-gradient(135deg,var(--accent-soft),var(--sky-soft));box-shadow:none}
+.next p{max-width:62ch;font-size:1.05rem}
+.stage{font-size:.82rem;font-weight:700;color:var(--accent)}
+.funnel{display:flex;flex-direction:column;gap:10px}
+.f-row{display:grid;grid-template-columns:110px 1fr 36px;gap:12px;align-items:center}
+.f-bar{height:10px;background:var(--bg-2);border-radius:999px;overflow:hidden}
+.f-bar i{display:block;height:100%;background:var(--accent);border-radius:999px;min-width:0}
+.f-row b{font-variant-numeric:tabular-nums;font-weight:600}
+.goal{display:flex;flex-direction:column;gap:8px}
+.goal .f-bar{height:12px}
+.big{font-family:var(--display);font-size:2.1rem;font-weight:500;font-variant-numeric:tabular-nums;line-height:1}
+
+/* ideas */
+.idea-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.score-badge{min-width:64px;text-align:center;border-radius:14px;padding:8px 10px;background:var(--accent-soft)}
+.score-badge .big{font-size:1.55rem}
+.score-badge small{display:block;color:var(--muted);font-size:.72rem;margin-top:2px}
+.crit{display:grid;grid-template-columns:minmax(100px,140px) repeat(2,minmax(0,110px));gap:6px 14px;font-size:.88rem;align-items:center;background:var(--bg);border-radius:12px;padding:12px 14px}
+.crit .h{color:var(--muted);font-size:.78rem;font-weight:700}
+.pips{display:flex;gap:3px}
+.pips i{width:13px;height:7px;border-radius:999px;background:var(--line)}
+.pips i.on{background:var(--accent)}
+.gap-note{background:var(--warn-soft);border-radius:12px;padding:10px 14px;font-size:.92rem}
+
+/* tasks */
+.kanban{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.col{display:flex;flex-direction:column;gap:12px;background:var(--bg-2);border-radius:20px;padding:12px}
+.col>h3{display:flex;justify-content:space-between;color:var(--muted);font-size:.95rem;padding:4px 6px 0}
+.col .card{padding:16px;gap:8px}
+.task.overdue{box-shadow:inset 3px 0 0 var(--bad),var(--shadow)}
+@media (max-width:760px){.kanban{grid-template-columns:1fr}}
+
+/* talks / log */
+dl.fields{margin:0;display:flex;flex-direction:column;gap:10px}
+dl.fields dt{font-weight:700;font-size:.82rem;color:var(--muted)}
+dl.fields dd{margin:0;white-space:pre-wrap}
+.linked{display:flex;flex-direction:column;gap:6px;background:var(--bg);border-radius:12px;padding:10px 14px}
+.linked .meta{color:var(--ink)}
+.timeline{display:flex;flex-direction:column;gap:14px;border-inline-start:2px solid var(--line);padding-inline-start:18px;margin-inline-start:6px}
+.timeline .card{position:relative}
+.timeline .card::before{content:"";position:absolute;inset-inline-start:-26px;top:24px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+.timeline .card.learning::before{background:var(--warn)}
+
+/* ai output */
+.ai-out{background:var(--bg);border-radius:12px;padding:14px 16px;max-height:55vh;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.ai-out h4{margin:6px 0 0;font-family:var(--display);font-weight:500;font-size:1rem}
+.ai-out ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:3px}
+.ai-note{font-size:.84rem;color:var(--muted)}
+.ai-text h4{margin:6px 0 0;font-family:var(--display);font-weight:500;font-size:1rem}
+.ai-text ul{margin:0;padding-inline-start:20px}
+.ai-text{display:flex;flex-direction:column;gap:6px}
+details.ai-box summary{cursor:pointer;font-weight:600;color:var(--accent)}
+
+/* modal */
+#modal{position:fixed;inset:0;z-index:20;background:rgba(25,30,32,.32);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding:28px 12px;overflow-y:auto}
+#modal[hidden]{display:none}
+.sheet{background:var(--surface);border-radius:22px;width:min(640px,100%);padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-lift)}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.icon{border:0;background:var(--bg-2);border-radius:999px;width:32px;height:32px;font-size:.95rem;cursor:pointer;color:var(--muted);display:grid;place-items:center}
+.intro{color:var(--muted);font-size:.93rem}
+form{display:flex;flex-direction:column;gap:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label,.field .lbl{font-weight:600;font-size:.92rem}
+.field .hint{color:var(--muted);font-size:.82rem}
+.field input,.field select,.field textarea{border:1.5px solid transparent;border-radius:12px;padding:10px 12px;background:var(--bg);width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+.field textarea{min-height:84px;resize:vertical}
+.scale{display:flex;gap:6px}
+.scale button{width:42px;height:38px;border:0;border-radius:12px;background:var(--bg);cursor:pointer;font-weight:700}
+.scale button:hover{background:var(--bg-2)}
+.scale button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.task-rows{display:flex;flex-direction:column;gap:8px}
+.task-row{display:grid;grid-template-columns:1fr 110px 150px 32px;gap:6px;align-items:center}
+.task-row input,.task-row select{border:1.5px solid transparent;border-radius:10px;padding:8px 10px;background:var(--bg);width:100%}
+.task-row input:focus,.task-row select:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+@media (max-width:560px){.task-row{grid-template-columns:1fr 1fr 32px}.task-row input[type=text]{grid-column:1/-1}}
+.form-actions{display:flex;gap:8px;flex-wrap:wrap}
+.form-err{color:var(--bad);font-weight:600}
+.form-err:empty{display:none}
+.who-pick{display:flex;gap:12px;flex-wrap:wrap}
+.who-pick button{flex:1;min-width:120px;padding:20px;font-size:1.2rem;border-radius:18px}
+@media (prefers-reduced-motion: no-preference){
+  .btn,.filters button,nav.tabs a,.card{transition:background .18s,box-shadow .18s,color .18s}
+  .sheet{animation:rise .22s ease-out}
+  @keyframes rise{from{transform:translateY(8px);opacity:.6}to{transform:none;opacity:1}}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-row">
+    <div class="brand"><span class="mark" aria-hidden="true">ח</span><h1>חדר המייסדים</h1><span class="sub">Jose ו-Matan</span></div>
+    <div class="actions"><button class="me-btn" id="me-btn" type="button" hidden>מי אני?</button><button class="me-btn" id="out-btn" type="button" hidden>יציאה</button></div>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="מסכים"></nav>
+</header>
+<main id="view"></main>
+<div id="modal" hidden></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeFirestore, persistentLocalCache, collection, doc, setDoc, deleteDoc, getDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCp_TJune-tTZlPIUSXHv1PnGp79GfSYmI",
+  authDomain: "founders-room-817fe.firebaseapp.com",
+  projectId: "founders-room-817fe",
+  storageBucket: "founders-room-817fe.firebasestorage.app",
+  messagingSenderId: "873068750386",
+  appId: "1:873068750386:web:10c4c38218e5bb67ff3e2b"
+};
+const fbApp = initializeApp(firebaseConfig);
+const auth = getAuth(fbApp);
+let fdb;
+try { fdb = initializeFirestore(fbApp, { localCache: persistentLocalCache() }); } catch (e) { fdb = initializeFirestore(fbApp, {}); }
+
+const PEOPLE = ["Jose", "Matan"];
+const OWNERS = { Jose: "Jose", Matan: "Matan", both: "שנינו" };
+const SOURCES = { pain: "כאב אישי", edge: "יתרון לא הוגן", now: "למה עכשיו", spend: "איפה משלמים הרבה", copy: "מודל שעבד במקום אחר", other: "אחר" };
+const STATUS = { inbox: "בתיבה", short: "רשימה קצרה", top: "3 המובילות", dropped: "נפסלה" };
+const CRITERIA = [
+  ["pain", "עוצמת הכאב", "1 = מטרד קטן, 5 = כואב מאוד, מחפשים פתרון עכשיו"],
+  ["freq", "תדירות", "1 = פעם בשנה, 5 = כל יום"],
+  ["pay", "נכונות לשלם", "1 = לא ישלמו, 5 = כבר משלמים על פתרון גרוע"],
+  ["market", "גודל השוק", "1 = נישה קטנה, 5 = המון לקוחות פוטנציאליים"],
+  ["edge", "היתרון שלנו", "1 = אין לנו שום יתרון, 5 = אנחנו מכירים את זה מבפנים"],
+  ["whynow", "למה עכשיו", "1 = שום דבר לא השתנה, 5 = שינוי טכנולוגי או רגולטורי פותח חלון"]
+];
+const RESEARCH_KINDS = { competitor: "מתחרה", review: "ביקורות ותלונות", funding: "גיוסים", market: "גודל שוק", link: "קישור", insight: "תובנה", ai: "ניתוח AI" };
+const TALK_KINDS = { customer: "לקוח פוטנציאלי", advisor: "יועץ / מנטור", investor: "משקיע", weekly: "פגישה שבועית" };
+const TASK_STATUS = { todo: "לביצוע", doing: "בעבודה", done: "בוצע" };
+const LOG_KINDS = { decision: "החלטה", learning: "למידה" };
+const COLS = ["problems", "scores", "research", "talks", "tasks", "log"];
+const TARGET = 40;
+
+const VIEWS = {
+  home: { label: "סקירה" },
+  problems: { label: "תיבת בעיות", col: "problems" },
+  ideas: { label: "דירוג" },
+  research: { label: "מחקר", col: "research" },
+  talks: { label: "שיחות ופגישות", col: "talks" },
+  tasks: { label: "משימות", col: "tasks" },
+  log: { label: "יומן", col: "log" }
+};
+
+const state = {
+  me: null,
+  view: "home",
+  db: null,
+  mode: "loading", // loading | live | local
+  loaded: new Set(),
+  slow: false,
+  readOnly: false,
+  ai: null,
+  user: undefined,
+  loginErr: "",
+  data: Object.fromEntries(COLS.map(c => [c, []])),
+  filters: { problems: "all", talks: "all", tasks: "all", research: "all" }
+};
+
+/* ---------- helpers ---------- */
+function esc(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function todayISO() { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+function fmtDate(s) { if (!s) return ""; const p = String(s).slice(0, 10).split("-"); if (p.length < 3) return esc(s); return `${+p[2]}.${+p[1]}.${p[0].slice(2)}`; }
+function fmtTs(ts) { if (!ts) return ""; const d = new Date(ts); return `${d.getDate()}.${d.getMonth() + 1}.${String(d.getFullYear()).slice(2)}`; }
+function daysSince(iso) { if (!iso) return null; const d = new Date(iso + "T12:00:00"); return Math.floor((Date.now() - d.getTime()) / 86400000); }
+function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : null; }
+function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function byNewest(a, b) { return (b.createdAt || 0) - (a.createdAt || 0); }
+function problemsActive() { return state.data.problems.filter(p => !p.example); }
+function problemById(id) { return state.data.problems.find(p => p.id === id); }
+function problemTitle(id) { const p = problemById(id); return p ? p.title : ""; }
+function stClass(st) { return { inbox: "sky", short: "warn", top: "accent", dropped: "bad" }[st] || ""; }
+function opts(map, sel) { return Object.entries(map).map(([k, v]) => `<option value="${esc(k)}"${k === sel ? " selected" : ""}>${esc(v)}</option>`).join(""); }
+
+function scoreOf(pid, person) { return state.data.scores.find(s => s.problemId === pid && s.person === person); }
+function totalOf(s) {
+  if (!s) return null;
+  const v = CRITERIA.map(([k]) => +s[k] || 0).filter(x => x > 0);
+  return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+}
+function rankOf(p) {
+  const t = PEOPLE.map(n => totalOf(scoreOf(p.id, n))).filter(x => x != null);
+  return t.length ? t.reduce((a, b) => a + b, 0) / t.length : null;
+}
+function gapsOf(pid) {
+  const a = scoreOf(pid, PEOPLE[0]), b = scoreOf(pid, PEOPLE[1]);
+  if (!a || !b) return [];
+  return CRITERIA.filter(([k]) => Math.abs((+a[k] || 0) - (+b[k] || 0)) >= 2).map(([k, l]) => `${l} (${PEOPLE[0]}: ${a[k]}, ${PEOPLE[1]}: ${b[k]})`);
+}
+
+/* ---------- storage ---------- */
+let localSeq = 0;
+async function saveDoc(col, id, obj) {
+  if (state.mode === "live") {
+    const ref = id ? doc(fdb, col, id) : doc(collection(fdb, col));
+    await setDoc(ref, obj);
+    return ref.id;
+  } else {
+    const arr = state.data[col];
+    if (id) {
+      const i = arr.findIndex(x => x.id === id);
+      if (i >= 0) arr[i] = { id, ...obj }; else arr.push({ id, ...obj });
+    } else { id = "local" + (++localSeq); arr.push({ id, ...obj }); }
+    render();
+    return id;
+  }
+}
+async function removeDoc(col, id) {
+  if (state.mode === "live") await deleteDoc(doc(fdb, col, id));
+  else { state.data[col] = state.data[col].filter(x => x.id !== id); render(); }
+}
+function errText(e) {
+  const code = e && e.code;
+  if (code === "permission-denied" || code === "invalid_argument") return "אין הרשאה לשמור. נסו להתנתק ולהתחבר מחדש.";
+  if (code === "resource-exhausted" || code === "quota_exceeded") return "המקום במאגר התמלא. מחקו פריטים ישנים ונסו שוב.";
+  if (code === "resource_exhausted") return "יותר מדי פעולות ברצף. חכו רגע ונסו שוב.";
+  return "השמירה לא הצליחה. בדקו את החיבור ונסו שוב.";
+}
+
+/* ---------- forms ---------- */
+let currentSubmit = null;
+function fieldHTML(f, val) {
+  const id = "f-" + f.id;
+  const v = val ?? f.def ?? "";
+  let input = "";
+  if (f.type === "tasks") {
+    return `<div class="field"><span class="lbl">${esc(f.label)}</span>${f.hint ? `<span class="hint">${esc(f.hint)}</span>` : ""}<div class="task-rows" id="${id}">${taskRowHTML()}</div><div><button type="button" class="btn small" data-addrow="${id}">+ עוד משימה</button></div></div>`;
+  }
+  if (f.type === "textarea") input = `<textarea id="${id}" name="${f.id}" placeholder="${esc(f.ph || "")}">${esc(v)}</textarea>`;
+  else if (f.type === "select") input = `<select id="${id}" name="${f.id}">${f.optional ? `<option value="">—</option>` : ""}${opts(f.options, v)}</select>`;
+  else if (f.type === "scale") input = `<input type="hidden" id="${id}" name="${f.id}" value="${esc(v)}"><div class="scale" role="group" aria-label="${esc(f.label)}">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-scale="${id}" data-v="${n}" aria-pressed="${String(+v === n)}">${n}</button>`).join("")}</div>`;
+  else input = `<input id="${id}" name="${f.id}" type="${f.type === "date" ? "date" : f.type === "url" ? "url" : "text"}" value="${esc(v)}" placeholder="${esc(f.ph || "")}"${f.list ? ` list="${id}-list"` : ""}>${f.list ? `<datalist id="${id}-list">${f.list.map(x => `<option value="${esc(x)}">`).join("")}</datalist>` : ""}`;
+  return `<div class="field"><label for="${id}">${esc(f.label)}${f.req ? " *" : ""}</label>${input}${f.hint ? `<span class="hint">${esc(f.hint)}</span>` : ""}</div>`;
+}
+function taskRowHTML() {
+  const ownerOpts = Object.entries(OWNERS).map(([k, v]) => `<option value="${k}"${k === state.me ? " selected" : ""}>${esc(v)}</option>`).join("");
+  return `<div class="task-row"><input type="text" placeholder="מה צריך לעשות" aria-label="משימה"><select aria-label="אחראי">${ownerOpts}</select><input type="date" aria-label="עד מתי"><button type="button" class="icon" data-delrow aria-label="הסרת שורה">✕</button></div>`;
+}
+function openForm({ title, intro, fields, values = {}, submitLabel = "שמירה", onSubmit }) {
+  const m = document.getElementById("modal");
+  m.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <div class="sheet-head"><h2 id="m-title">${esc(title)}</h2><button class="icon" type="button" data-close aria-label="סגירה">✕</button></div>
+    ${intro ? `<p class="intro">${intro}</p>` : ""}
+    <form id="m-form" novalidate>${fields.map(f => fieldHTML(f, values[f.id])).join("")}
+      <div class="form-err" id="m-err"></div>
+      <div class="form-actions"><button type="submit" class="btn primary">${esc(submitLabel)}</button><button type="button" class="btn ghost" data-close>ביטול</button></div>
+    </form></div>`;
+  m.hidden = false;
+  currentSubmit = async () => {
+    const vals = {};
+    for (const f of fields) {
+      if (f.type === "tasks") {
+        vals[f.id] = [...document.querySelectorAll(`#f-${f.id} .task-row`)].map(r => {
+          const [t, o, d] = r.querySelectorAll("input,select");
+          return { title: t.value.trim(), owner: o.value, due: d.value };
+        }).filter(x => x.title);
+      } else vals[f.id] = (document.getElementById("f-" + f.id).value || "").trim();
+    }
+    const missing = fields.filter(f => f.req && !vals[f.id]);
+    if (missing.length) { document.getElementById("m-err").textContent = "חסר: " + missing.map(f => f.label).join(", "); return; }
+    const btn = m.querySelector("button[type=submit]");
+    btn.disabled = true;
+    try { await onSubmit(vals); closeModal(); }
+    catch (e) { document.getElementById("m-err").textContent = errText(e); btn.disabled = false; }
+  };
+  const first = m.querySelector("input:not([type=hidden]),select,textarea");
+  if (first) first.focus();
+}
+function closeModal() { const m = document.getElementById("modal"); m.hidden = true; m.innerHTML = ""; currentSubmit = null; }
+
+/* ---------- field specs ---------- */
+function clusters() { return [...new Set(state.data.problems.map(p => p.cluster).filter(Boolean))]; }
+function problemOptions(onlyActive) {
+  const list = state.data.problems.filter(p => !onlyActive || p.status !== "dropped").sort((a, b) => (rankOf(b) || 0) - (rankOf(a) || 0));
+  return Object.fromEntries(list.map(p => [p.id, p.title]));
+}
+const problemFields = () => [
+  { id: "title", label: "כותרת קצרה", req: true, ph: "למשל: מעקב אחרי הרשאות בענן" },
+  { id: "who", label: "מי מתקשה?", ph: "למשל: מנהלי IT בחברות של 50–200 עובדים" },
+  { id: "what", label: "במה הוא מתקשה?", ph: "למשל: לדעת מי קיבל גישה למה" },
+  { id: "when", label: "באיזה מצב?", ph: "למשל: כשעובד עוזב או מחליף תפקיד" },
+  { id: "workaround", label: "איך מתמודדים עם זה היום?", ph: "למשל: אקסל שמתעדכן ידנית", hint: "אם אין לכם תשובה, הבעיה עוד לא ברורה מספיק" },
+  { id: "cost", label: "כמה זה עולה להם?", ph: "זמן, כסף או סיכון" },
+  { id: "source", label: "מאיפה הגיעה הבעיה?", type: "select", options: SOURCES, def: "pain" },
+  { id: "cluster", label: "נושא (לקיבוץ בעיות דומות)", ph: "למשל: הרשאות, ענן, גיוס עובדים", list: clusters() },
+  { id: "notes", label: "הערות", type: "textarea" }
+];
+const researchFields = () => [
+  { id: "problemId", label: "לאיזו בעיה זה שייך?", type: "select", options: problemOptions(true), req: true },
+  { id: "kind", label: "סוג", type: "select", options: RESEARCH_KINDS, def: "competitor" },
+  { id: "title", label: "כותרת", req: true, ph: "למשל: שם המתחרה, או תמצית התובנה" },
+  { id: "url", label: "קישור", type: "url", ph: "https://" },
+  { id: "note", label: "מה מצאנו", type: "textarea", ph: "מה הם עושים, כמה זה עולה, על מה לקוחות מתלוננים" }
+];
+const externalTalkFields = () => [
+  { id: "kind", label: "עם מי דיברנו?", type: "select", options: { advisor: TALK_KINDS.advisor, investor: TALK_KINDS.investor, customer: TALK_KINDS.customer }, def: "advisor" },
+  { id: "date", label: "תאריך", type: "date", def: todayISO(), req: true },
+  { id: "withWhom", label: "שם", req: true },
+  { id: "role", label: "תפקיד וארגון", ph: "למשל: CISO בחברת פינטק" },
+  { id: "problemId", label: "קשור לבעיה", type: "select", options: problemOptions(false), optional: true },
+  { id: "summary", label: "על מה דיברנו", type: "textarea" },
+  { id: "insights", label: "מה למדנו", type: "textarea", hint: "הדבר הכי מפתיע ששמעתם. ציטוט מדויק שווה יותר מסיכום" },
+  { id: "nextSteps", label: "צעדים הבאים", type: "textarea", ph: "למי לחזור, מה לבדוק, היכרות שהובטחה" }
+];
+const weeklyFields = () => [
+  { id: "date", label: "תאריך", type: "date", def: todayISO(), req: true },
+  { id: "collected", label: "מה עשינו מאז הפגישה הקודמת", type: "textarea", ph: "כמה בעיות נאספו, מה נחקר, עם מי דיברנו" },
+  { id: "decisions", label: "מה החלטנו", type: "textarea", hint: "החלטות חשובות כדאי להעתיק גם ליומן" },
+  { id: "blockers", label: "מה תקוע", type: "textarea" },
+  { id: "newTasks", label: "משימות לשבוע הבא", type: "tasks", hint: "כל שורה נכנסת אוטומטית למסך המשימות, עם אחראי ותאריך" }
+];
+const taskFields = () => [
+  { id: "title", label: "משימה", req: true },
+  { id: "owner", label: "אחראי", type: "select", options: OWNERS, def: state.me || "Jose" },
+  { id: "due", label: "עד מתי", type: "date" },
+  { id: "status", label: "סטטוס", type: "select", options: TASK_STATUS, def: "todo" },
+  { id: "notes", label: "פרטים", type: "textarea" }
+];
+const logFields = () => [
+  { id: "kind", label: "סוג", type: "select", options: LOG_KINDS, def: "decision" },
+  { id: "date", label: "תאריך", type: "date", def: todayISO(), req: true },
+  { id: "title", label: "מה החלטנו / מה למדנו", req: true },
+  { id: "why", label: "למה", type: "textarea", hint: "בעוד חצי שנה תרצו לזכור למה, לא רק מה" },
+  { id: "problemId", label: "קשור לבעיה", type: "select", options: problemOptions(false), optional: true }
+];
+const FIELDS = { problems: problemFields, research: researchFields, tasks: taskFields, log: logFields };
+
+function addOrEdit(col, id, preset) {
+  const existing = id ? state.data[col].find(x => x.id === id) : null;
+  let fields, title;
+  if (col === "talks") {
+    const kind = existing ? existing.kind : preset;
+    fields = kind === "weekly" ? weeklyFields() : externalTalkFields();
+    title = kind === "weekly" ? (existing ? "עריכת פגישה שבועית" : "סיכום פגישה שבועית") : (existing ? "עריכת שיחה" : "סיכום שיחה");
+  } else {
+    fields = FIELDS[col]();
+    title = { problems: "בעיה", research: "פריט מחקר", tasks: "משימה", log: "רשומה ביומן" }[col];
+    title = (existing ? "עריכת " : "הוספת ") + title;
+  }
+  if (col === "research" && !Object.keys(problemOptions(true)).length) {
+    openForm({ title: "קודם צריך בעיה", intro: "מחקר תמיד שייך לבעיה. הוסיפו בעיה לתיבת הבעיות ואז חזרו לכאן.", fields: [], submitLabel: "לתיבת הבעיות", onSubmit: async () => { location.hash = "problems"; } });
+    return;
+  }
+  const values = existing ? { ...existing } : {};
+  if (col === "research" && !existing && state.filters.research !== "all") values.problemId = state.filters.research;
+  let intro = col === "problems" && !existing ? "תעדו בעיה, לא פתרון. אסור לכתוב כאן מה נבנה." : "";
+  if (col === "talks" && existing && existing.kind === "weekly") {
+    const linked = state.data.tasks.filter(t => t.meetingId === existing.id);
+    if (linked.length) intro = "משימות שכבר נוצרו מהפגישה הזו: " + linked.map(t => esc(t.title)).join(" · ") + ". אפשר לערוך אותן במסך המשימות. שורות חדשות למטה יתווספו.";
+  }
+  openForm({
+    title, intro, fields, values,
+    onSubmit: async (vals) => {
+      const base = existing ? { ...existing } : { createdBy: state.me, createdAt: Date.now() };
+      delete base.id;
+      const newTasks = vals.newTasks || [];
+      delete vals.newTasks;
+      const doc = { ...base, ...vals, updatedAt: Date.now() };
+      if (col === "talks" && !existing) doc.kind = preset === "weekly" ? "weekly" : vals.kind;
+      if (col === "problems" && !existing) doc.status = "inbox";
+      if (col === "problems" && existing && existing.example) doc.example = true;
+      const savedId = await saveDoc(col, id, doc);
+      let i = 0;
+      for (const t of newTasks) {
+        await saveDoc("tasks", null, { ...t, status: "todo", notes: "", meetingId: savedId, meetingDate: doc.date, createdBy: state.me, createdAt: Date.now() + (i++) });
+      }
+    }
+  });
+}
+
+function openScore(pid) {
+  const p = problemById(pid); if (!p) return;
+  const mine = scoreOf(pid, state.me) || {};
+  openForm({
+    title: "דירוג: " + p.title,
+    intro: `מדרג/ת כ-${esc(state.me)}. דרגו לבד, בלי להתייעץ. אחרי ששניכם מדרגים, הפערים הגדולים יופיעו ותוכלו לדבר עליהם.`,
+    fields: CRITERIA.map(([k, l, h]) => ({ id: k, label: l, type: "scale", hint: h, req: true })),
+    values: mine,
+    onSubmit: async (vals) => {
+      const doc = { problemId: pid, person: state.me, updatedAt: Date.now() };
+      CRITERIA.forEach(([k]) => doc[k] = +vals[k]);
+      await saveDoc("scores", pid + "__" + state.me, doc);
+    }
+  });
+}
+
+function pickMe() {
+  const m = document.getElementById("modal");
+  m.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <div class="sheet-head"><h2 id="m-title">מי עובד עכשיו?</h2>${state.me ? `<button class="icon" type="button" data-close aria-label="סגירה">✕</button>` : ""}</div>
+    <p class="intro">כך נדע מי הוסיף מה ומי דירג מה. הבחירה נשמרת בדפדפן הזה.</p>
+    <div class="who-pick">${PEOPLE.map(n => `<button type="button" class="btn${n === state.me ? " primary" : ""}" data-me="${n}">${n}</button>`).join("")}</div></div>`;
+  m.hidden = false;
+}
+
+/* ---------- AI analysis ---------- */
+function md(text) {
+  const out = []; let ul = false;
+  const inline = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+  for (const raw of String(text || "").split("\n")) {
+    const line = raw.trim();
+    const li = line.match(/^[-*•]\s+(.*)/);
+    if (li) { if (!ul) { out.push("<ul>"); ul = true; } out.push(`<li>${inline(li[1])}</li>`); continue; }
+    if (ul) { out.push("</ul>"); ul = false; }
+    if (!line) continue;
+    const h = line.match(/^#{1,4}\s+(.*)/);
+    out.push(h ? `<h4>${inline(h[1])}</h4>` : `<p>${inline(line)}</p>`);
+  }
+  if (ul) out.push("</ul>");
+  return out.join("");
+}
+function aiButton(p) {
+  if (!state.ai) return "";
+  const both = PEOPLE.every(n => scoreOf(p.id, n));
+  return both ? `<div><button type="button" class="btn small ai" data-ai="${esc(p.id)}">ניתוח AI</button></div>`
+    : `<p class="small muted">ניתוח AI ייפתח אחרי ששניכם דירגתם את הבעיה.</p>`;
+}
+function aiPrompt(p) {
+  const sc = PEOPLE.map(n => { const s = scoreOf(p.id, n); return s ? `${n}: ` + CRITERIA.map(([k, l]) => `${l} ${s[k]}`).join(", ") : ""; }).filter(Boolean).join("\n");
+  const found = state.data.research.filter(r => r.problemId === p.id && r.kind !== "ai").map(r => `- [${RESEARCH_KINDS[r.kind] || r.kind}] ${r.title}${r.note ? ": " + String(r.note).slice(0, 400) : ""}`).join("\n") || "עדיין כלום.";
+  return `אתה יועץ ותיק לסטרטאפים, ועוזר לשני מייסדים בשלב גילוי הבעיה. אחד מהם בעל תואר במדעי המחשב, והשני בעל ניסיון בסייבר הגנתי, רשתות, תעבורת ענן וניהול לקוחות. אין להם עדיין פתרון, ואל תציע להם פתרון: המטרה היא להבין אם הבעיה שווה מחקר נוסף.
+
+הבעיה: ${p.title}
+מי מתקשה: ${p.who || "לא צוין"}
+במה: ${p.what || "לא צוין"}
+באיזה מצב: ${p.when || "לא צוין"}
+איך מתמודדים היום: ${p.workaround || "לא צוין"}
+מה זה עולה: ${p.cost || "לא צוין"}
+הערות: ${p.notes || "אין"}
+
+ציוני המייסדים (1 עד 5):
+${sc}
+
+מה המייסדים כבר מצאו במחקר:
+${found}
+
+כתוב ניתוח בעברית, תמציתי וענייני, בדיוק לפי הכותרות האלה (כותרת מתחילה ב-##, נקודה מתחילה ב-"- "):
+## מתחרים ופתרונות קיימים
+חברות ומוצרים שאתה מכיר שפותרים את הבעיה או חלק ממנה, ומה החולשה של כל אחד. אל תמציא חברות; אם אינך בטוח, כתוב זאת.
+## גודל השוק
+הערכה גסה: מי הלקוחות, כמה יש בערך, וכמה משלמים היום. סמן במפורש שזו הערכה.
+## למה עכשיו
+## סיכונים וסימני אזהרה
+## מה לבדוק בעצמכם
+3 עד 5 חיפושים או בדיקות ספציפיות שיאמתו או יפריכו את מה שכתבת.
+## שאלות לשיחות עם לקוחות
+5 שאלות פתוחות על העבר וההתנהגות של הלקוח, לא על פתרון עתידי.
+## שורה תחתונה
+2 עד 3 משפטים: עד כמה הבעיה נראית מבטיחה, ולמה. אם הציונים של המייסדים נראים לך אופטימיים או פסימיים מדי, אמור זאת.
+
+הידע שלך עשוי להיות לא עדכני: אל תציג מספרים או שמות כעובדות ודאיות.`;
+}
+let aiCtl = null;
+async function openAI(pid) {
+  const p = problemById(pid); if (!p || !state.ai) return;
+  const m = document.getElementById("modal");
+  m.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <div class="sheet-head"><h2 id="m-title">ניתוח AI: ${esc(p.title)}</h2><button class="icon" type="button" data-close aria-label="סגירה">✕</button></div>
+    <p class="ai-note">Claude מנתח לפי הידע שלו, בלי חיפוש באינטרנט, ולכן המידע עלול להיות חלקי או לא עדכני. השתמשו בו כנקודת פתיחה למחקר שלכם, לא כתשובה. הניתוח נספר במכסת השימוש של מי שלוחץ.</p>
+    <div class="ai-out" id="ai-out" aria-live="polite"><p class="muted">חושב… זה יכול לקחת עד דקה.</p></div>
+    <div class="form-err" id="ai-err"></div>
+    <div class="form-actions"><button type="button" class="btn" id="ai-stop">עצירה</button><button type="button" class="btn primary" id="ai-save" hidden>שמירה במחקר</button><button type="button" class="btn ghost" data-close>סגירה</button></div></div>`;
+  m.hidden = false;
+  const out = document.getElementById("ai-out"), stop = document.getElementById("ai-stop"), save = document.getElementById("ai-save"), err = document.getElementById("ai-err");
+  aiCtl = new AbortController();
+  const ctl = aiCtl;
+  stop.onclick = () => ctl.abort();
+  try {
+    const { text, truncated } = await state.ai(aiPrompt(p), { signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(text); } });
+    if (!document.getElementById("ai-out")) return;
+    out.innerHTML = md(text);
+    if (truncated) err.textContent = "הניתוח נקטע באמצע. אפשר לשמור את מה שיש.";
+    stop.hidden = true; save.hidden = false;
+    save.onclick = async () => {
+      save.disabled = true;
+      try {
+        await saveDoc("research", null, { problemId: p.id, kind: "ai", title: "ניתוח AI · " + fmtDate(todayISO()), url: "", note: text, createdBy: state.me, createdAt: Date.now() });
+        closeModal();
+      } catch (e) { err.textContent = errText(e); save.disabled = false; }
+    };
+  } catch (e) {
+    if (!document.getElementById("ai-out")) return;
+    stop.hidden = true;
+    if (e && e.text) out.innerHTML = md(e.text);
+    const code = e && e.code;
+    if (code === "cancelled") { err.textContent = ""; if (!e.text) out.innerHTML = `<p class="muted">הניתוח נעצר.</p>`; }
+    else if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(code)) { err.textContent = "ניתוח AI לא זמין בחשבון הזה."; state.ai = null; render(); }
+    else if (code === "rate_limited") err.textContent = "הגעתם למגבלת השימוש כרגע. נסו שוב מאוחר יותר.";
+    else if (code === "session_expired") err.textContent = "צריך להתחבר מחדש ל-Claude.";
+    else if (code === "refused") { out.innerHTML = ""; err.textContent = "Claude לא השלים את הניתוח הזה. נסו לנסח את הבעיה אחרת."; }
+    else err.textContent = "הניתוח נקטע בגלל תקלה. אפשר לסגור ולנסות שוב.";
+  }
+}
+
+/* ---------- views ---------- */
+function deleteBtn(col, id) { return `<button type="button" class="btn small ghost danger" data-del="${col}" data-id="${esc(id)}">מחיקה</button>`; }
+function editBtn(col, id) { return `<button type="button" class="btn small ghost" data-edit="${col}" data-id="${esc(id)}">עריכה</button>`; }
+function filterBar(key, map) {
+  return `<div class="filters" role="group">${Object.entries(map).map(([k, v]) => `<button type="button" data-filter="${key}" data-v="${esc(k)}" aria-pressed="${String(state.filters[key] === k)}">${esc(v)}</button>`).join("")}</div>`;
+}
+function statement(p) {
+  const what = p.what ? `מתקשה ב${esc(p.what)}` : `<span class="missing">חסר: במה הוא מתקשה?</span>`;
+  const how = p.workaround ? `היום מתמודדים באמצעות ${esc(p.workaround)}` : `<span class="missing">חסר: איך מתמודדים היום?</span>`;
+  return `<p class="statement"><b>${esc(p.who || "מישהו")}</b> ${what}${p.when ? ` כאשר ${esc(p.when)}` : ""}. ${how}${p.cost ? `, וזה עולה להם ${esc(p.cost)}` : ""}.</p>`;
+}
+
+function nextStep() {
+  const P = problemsActive().filter(p => p.status !== "dropped");
+  const n = problemsActive().length;
+  const bothScored = P.filter(p => PEOPLE.every(x => scoreOf(p.id, x))).length;
+  const short = P.filter(p => p.status === "short" || p.status === "top").length;
+  const top = P.filter(p => p.status === "top").length;
+  if (n < 30) return { stage: "שלב 1 · איסוף", text: `אספו עוד ${30 - n} בעיות לפחות. בלי לסנן, בלי לשפוט, ובלי לחשוב על פתרונות. היעד: 30 עד 50 בשבועיים.`, href: "#problems", cta: "לתיבת הבעיות" };
+  if (bothScored < Math.min(P.length, 15)) return { stage: "שלב 2 · קיבוץ ודירוג", text: "תנו לכל בעיה נושא כדי לאחד בעיות דומות. אחר כך כל אחד מדרג לבד, ואז מדברים על הפערים בפגישה השבועית.", href: "#ideas", cta: "למסך הדירוג" };
+  if (short < 5) return { stage: "שלב 3 · רשימה קצרה", text: "בחרו 5 עד 10 בעיות עם הציון הגבוה ביותר והעבירו אותן לרשימה הקצרה.", href: "#ideas", cta: "למסך הדירוג" };
+  if (top < 3) return { stage: "שלב 4 · מחקר שולחני", text: "לכל בעיה ברשימה הקצרה: מי המתחרים, על מה הלקוחות שלהם מתלוננים, כמה הם גייסו. בסוף בוחרים 3 מובילות.", href: "#research", cta: "למסך המחקר" };
+  return { stage: "שלב 5 · שיחות לקוחות", text: "יש לכם 3 בעיות מובילות. הגיע הזמן לדבר עם אנשים שחווים אותן. זה שיעור 2.", href: "#talks", cta: "למסך השיחות" };
+}
+
+function viewHome() {
+  const P = problemsActive();
+  const cnt = s => P.filter(p => p.status === s).length;
+  const funnel = [["כל הבעיות", P.length], ["רשימה קצרה", cnt("short") + cnt("top")], ["3 המובילות", cnt("top")]];
+  const maxF = Math.max(1, ...funnel.map(f => f[1]));
+  const week = Date.now() - 7 * 86400000;
+  const perPerson = PEOPLE.map(n => [n, P.filter(p => p.createdBy === n && (p.createdAt || 0) >= week).length]);
+  const ns = nextStep();
+  const myTasks = state.data.tasks.filter(t => t.status !== "done" && (t.owner === state.me || t.owner === "both")).sort((a, b) => (a.due || "9999").localeCompare(b.due || "9999"));
+  const weeklies = state.data.talks.filter(t => t.kind === "weekly").sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const lastW = weeklies[0];
+  const dW = lastW ? daysSince(lastW.date) : null;
+  const ranked = P.filter(p => p.status !== "dropped" && rankOf(p) != null).sort((a, b) => rankOf(b) - rankOf(a)).slice(0, 5);
+  return `
+  <div class="view-head"><div><h1>שלום ${esc(state.me || "")}</h1><p class="lead">איפה אנחנו במשפך הרעיונות, ומה הצעד הבא.</p></div></div>
+  <section class="card next"><span class="stage">${esc(ns.stage)}</span><p>${esc(ns.text)}</p><div><a class="btn primary" href="${ns.href}">${esc(ns.cta)}</a></div></section>
+  <div class="grid">
+    <section class="card"><h2>יעד האיסוף</h2>
+      <div class="goal"><div class="f-bar" role="img" aria-label="${P.length} מתוך ${TARGET}"><i style="width:${Math.min(100, P.length / TARGET * 100)}%"></i></div>
+      <p class="small muted num">${P.length} בעיות מתוך יעד של ${TARGET}</p></div>
+      <div class="meta">${perPerson.map(([n, c]) => `<span class="chip">${esc(n)}: ${c} השבוע</span>`).join("")}</div>
+    </section>
+    <section class="card"><h2>המשפך</h2><div class="funnel">${funnel.map(([l, v]) => `<div class="f-row"><span class="small">${l}</span><div class="f-bar"><i style="width:${v / maxF * 100}%"></i></div><b>${v}</b></div>`).join("")}</div></section>
+    <section class="card"><h2>פגישה שבועית</h2>
+      ${lastW ? `<p><span class="big">${dW}</span> <span class="muted">ימים מאז הפגישה האחרונה (${fmtDate(lastW.date)})</span></p>${dW > 7 ? `<span class="chip warn">עבר יותר משבוע</span>` : ""}` : `<p class="muted">עוד לא תיעדתם פגישה שבועית. קבעו שעה קבועה בשבוע.</p>`}
+      <div><button type="button" class="btn small" data-add="talks" data-preset="weekly">סיכום פגישה שבועית</button></div>
+    </section>
+  </div>
+  <div class="grid">
+    <section class="card"><h2>המשימות שלי</h2>${myTasks.length ? `<div class="list">${myTasks.slice(0, 6).map(t => `<div class="meta"><span class="chip ${t.status === "doing" ? "accent" : ""}">${TASK_STATUS[t.status] || ""}</span><span style="color:var(--ink)">${esc(t.title)}</span>${t.due ? `<span class="num">${fmtDate(t.due)}</span>` : ""}</div>`).join("")}</div>` : `<p class="muted">אין משימות פתוחות.</p>`}<div><a href="#tasks" class="btn small">לכל המשימות</a></div></section>
+    <section class="card"><h2>הבעיות המובילות</h2>${ranked.length ? `<ol class="list" style="margin:0;padding-inline-start:20px">${ranked.map(p => `<li><b>${esc(p.title)}</b> <span class="muted num">${rankOf(p).toFixed(1)}</span></li>`).join("")}</ol>` : `<p class="muted">עוד לא דירגתם בעיות.</p>`}<div><a href="#ideas" class="btn small">לדירוג</a></div></section>
+  </div>`;
+}
+
+function viewProblems() {
+  const f = state.filters.problems;
+  let list = state.data.problems.slice().sort(byNewest);
+  if (f !== "all") list = list.filter(p => (p.status || "inbox") === f);
+  const groups = {};
+  list.forEach(p => { const k = p.cluster || "בלי נושא"; (groups[k] = groups[k] || []).push(p); });
+  const keys = Object.keys(groups).sort((a, b) => a === "בלי נושא" ? 1 : b === "בלי נושא" ? -1 : groups[b].length - groups[a].length);
+  return `
+  <div class="view-head"><div><h1>תיבת בעיות</h1><p class="lead">מי מתקשה, במה, מתי, איך מתמודדים היום, וכמה זה עולה. בעיות דומות מקובצות לפי נושא.</p></div>
+    <div class="actions"><button type="button" class="btn primary" data-add="problems">בעיה חדשה</button></div></div>
+  ${filterBar("problems", { all: "הכל", inbox: STATUS.inbox, short: STATUS.short, top: STATUS.top, dropped: STATUS.dropped })}
+  ${list.length ? keys.map(k => `<section class="list"><h2>${esc(k)} <span class="muted small num">(${groups[k].length})</span></h2>${groups[k].map(problemCard).join("")}</section>`).join("")
+    : `<div class="empty"><p>${f === "all" ? "התיבה ריקה. מקורות לבעיות: כאב אישי, יתרון לא הוגן, למה עכשיו, איפה משלמים הרבה, ומודל שעבד במקום אחר." : "אין בעיות בסטטוס הזה."}</p>${f === "all" ? `<button type="button" class="btn primary" data-add="problems">הוספת הבעיה הראשונה</button>` : ""}</div>`}`;
+}
+function problemCard(p) {
+  const st = p.status || "inbox";
+  const moves = Object.entries(STATUS).filter(([k]) => k !== st).map(([k, v]) => `<button type="button" class="btn small" data-status="${esc(p.id)}" data-v="${k}">${k === "dropped" ? "פסילה" : "→ " + v}</button>`).join("");
+  return `<article class="card">
+    <div class="meta">${p.example ? `<span class="chip ex">דוגמה</span>` : ""}<span class="chip ${stClass(st)}">${STATUS[st]}</span><span class="chip">${esc(SOURCES[p.source] || "")}</span><span>${esc(p.createdBy || "")} · ${fmtTs(p.createdAt)}</span>${rankOf(p) != null ? `<span class="num">ציון ${rankOf(p).toFixed(1)}</span>` : ""}</div>
+    <h3>${esc(p.title)}</h3>${statement(p)}${p.notes ? `<p class="small muted" style="white-space:pre-wrap">${esc(p.notes)}</p>` : ""}
+    <div class="row-actions">${moves}${editBtn("problems", p.id)}${deleteBtn("problems", p.id)}</div></article>`;
+}
+
+function pips(v) { return `<span class="pips" aria-label="${v || 0} מתוך 5">${[1, 2, 3, 4, 5].map(n => `<i class="${n <= (+v || 0) ? "on" : ""}"></i>`).join("")}</span>`; }
+function viewIdeas() {
+  const list = state.data.problems.filter(p => p.status !== "dropped").sort((a, b) => (rankOf(b) ?? -1) - (rankOf(a) ?? -1) || byNewest(a, b));
+  const other = PEOPLE.find(n => n !== state.me);
+  const pending = list.filter(p => !scoreOf(p.id, state.me)).length;
+  return `
+  <div class="view-head"><div><h1>דירוג</h1><p class="lead">כל אחד מדרג לבד, מ-1 עד 5, לפי שישה קריטריונים. הציון של השותף נחשף רק אחרי שדירגת בעצמך, כדי שלא תושפעו זה מזה.</p></div>
+    ${pending ? `<span class="chip warn">${pending} בעיות שעוד לא דירגת</span>` : ""}</div>
+  ${list.length ? `<div class="list">${list.map(p => {
+    const mine = scoreOf(p.id, state.me), his = scoreOf(p.id, other);
+    const r = rankOf(p), gaps = gapsOf(p.id), st = p.status || "inbox";
+    return `<article class="card">
+      <div class="idea-top"><div style="display:flex;flex-direction:column;gap:6px">
+        <div class="meta">${p.example ? `<span class="chip ex">דוגמה</span>` : ""}<span class="chip ${stClass(st)}">${STATUS[st]}</span>${p.cluster ? `<span class="chip">${esc(p.cluster)}</span>` : ""}
+          ${PEOPLE.map(n => `<span>${esc(n)} ${scoreOf(p.id, n) ? "דירג ✓" : "עוד לא דירג"}</span>`).join(" · ")}</div>
+        <h3>${esc(p.title)}</h3></div>
+        ${mine && r != null ? `<div class="score-badge"><span class="big">${r.toFixed(1)}</span><small>ממוצע</small></div>` : ""}</div>
+      ${statement(p)}
+      ${mine ? `<div class="crit"><span class="h">קריטריון</span>${PEOPLE.map(n => `<span class="h">${esc(n)}</span>`).join("")}
+        ${CRITERIA.map(([k, l]) => `<span>${l}</span>${PEOPLE.map(n => { const s = scoreOf(p.id, n); return s ? pips(s[k]) : `<span class="muted small">—</span>`; }).join("")}`).join("")}</div>`
+        : his ? `<p class="small muted">${esc(other)} כבר דירג. דרג/י גם את/ה כדי לראות.</p>` : ""}
+      ${mine && gaps.length ? `<div class="gap-note"><b>פער גדול ביניכם:</b> ${gaps.map(esc).join(" · ")}. כדאי לדבר על זה בפגישה השבועית.</div>` : ""}
+      <div class="row-actions"><button type="button" class="btn small ${mine ? "" : "primary"}" data-score="${esc(p.id)}">${mine ? "עדכון הדירוג שלי" : "לדרג"}</button>
+        ${st !== "short" ? `<button type="button" class="btn small" data-status="${esc(p.id)}" data-v="short">→ רשימה קצרה</button>` : ""}
+        ${st !== "top" ? `<button type="button" class="btn small" data-status="${esc(p.id)}" data-v="top">→ 3 המובילות</button>` : ""}
+        ${st !== "inbox" ? `<button type="button" class="btn small" data-status="${esc(p.id)}" data-v="inbox">החזרה לתיבה</button>` : ""}
+        <button type="button" class="btn small ghost danger" data-status="${esc(p.id)}" data-v="dropped">פסילה</button></div>
+    </article>`;
+  }).join("")}</div>` : `<div class="empty"><p>אין עדיין בעיות לדרג.</p><a class="btn primary" href="#problems">לתיבת הבעיות</a></div>`}`;
+}
+
+function viewResearch() {
+  const shortlist = state.data.problems.filter(p => p.status === "short" || p.status === "top");
+  const f = state.filters.research;
+  const items = state.data.research.slice().sort(byNewest).filter(r => f === "all" || r.problemId === f);
+  const targets = f === "all" ? shortlist : state.data.problems.filter(p => p.id === f);
+  const fmap = { all: "הכל" }; shortlist.forEach(p => fmap[p.id] = p.title);
+  if (f !== "all" && !fmap[f]) fmap[f] = problemTitle(f);
+  const checklist = ["competitor", "review", "funding", "market"];
+  return `
+  <div class="view-head"><div><h1>מחקר שולחני</h1><p class="lead">לפני שמדברים עם לקוחות: מי כבר מנסה לפתור את הבעיה, על מה הלקוחות שלהם מתלוננים (G2, Reddit, Capterra), כמה הם גייסו, ומה גודל השוק.</p></div>
+    <div class="actions"><button type="button" class="btn primary" data-add="research">פריט מחקר</button></div></div>
+  ${Object.keys(fmap).length > 1 ? filterBar("research", fmap) : ""}
+  ${targets.length ? `<div class="grid">${targets.map(p => {
+    const mine = state.data.research.filter(r => r.problemId === p.id);
+    return `<section class="card"><h3>${esc(p.title)}</h3><div class="meta">${checklist.map(k => { const has = mine.some(r => r.kind === k); return `<span class="chip ${has ? "accent" : ""}">${has ? "✓ " : ""}${RESEARCH_KINDS[k]}</span>`; }).join("")}</div><p class="small muted num">${mine.length} פריטים</p>${aiButton(p)}</section>`;
+  }).join("")}</div>` : `<p class="muted small">כשתעבירו בעיות לרשימה הקצרה, יופיע כאן מה כבר נבדק לכל אחת.</p>`}
+  ${items.length ? `<div class="list">${items.map(r => {
+    const u = safeUrl(r.url);
+    return `<article class="card"><div class="meta"><span class="chip ${r.kind === "ai" ? "violet" : "accent"}">${esc(RESEARCH_KINDS[r.kind] || "")}</span><span>${esc(problemTitle(r.problemId))}</span><span>${esc(r.createdBy || "")} · ${fmtTs(r.createdAt)}</span></div>
+      <h3>${esc(r.title)}</h3>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener" class="small" dir="ltr" style="word-break:break-all">${esc(u)}</a>` : ""}${r.note ? (r.kind === "ai" ? `<details class="ai-box"><summary>הצגת הניתוח</summary><div class="ai-text" style="margin-top:10px">${md(r.note)}</div></details>` : `<p style="white-space:pre-wrap">${esc(r.note)}</p>`) : ""}
+      <div class="row-actions">${r.kind === "ai" ? "" : editBtn("research", r.id)}${deleteBtn("research", r.id)}</div></article>`;
+  }).join("")}</div>` : `<div class="empty"><p>עוד אין פריטי מחקר${f !== "all" ? " לבעיה הזו" : ""}.</p></div>`}`;
+}
+
+function viewTalks() {
+  const f = state.filters.talks;
+  const list = state.data.talks.slice().sort((a, b) => (b.date || "").localeCompare(a.date || "") || byNewest(a, b))
+    .filter(t => f === "all" || (f === "external" ? t.kind === "advisor" || t.kind === "investor" : t.kind === f));
+  return `
+  <div class="view-head"><div><h1>שיחות ופגישות</h1><p class="lead">פגישות פנימיות שבועיות, ושיחות עם יועצים, משקיעים ולקוחות פוטנציאליים. תעדו באותו יום, כל עוד הפרטים טריים.</p></div>
+    <div class="actions"><button type="button" class="btn primary" data-add="talks" data-preset="weekly">פגישה שבועית</button><button type="button" class="btn" data-add="talks" data-preset="external">שיחה חיצונית</button></div></div>
+  ${filterBar("talks", { all: "הכל", weekly: "פגישות שבועיות", external: "יועצים ומשקיעים", customer: "לקוחות" })}
+  ${list.length ? `<div class="list">${list.map(t => t.kind === "weekly" ? `
+    <article class="card"><div class="meta"><span class="chip accent">פגישה שבועית</span><span class="num">${fmtDate(t.date)}</span><span>תיעד/ה: ${esc(t.createdBy || "")}</span></div>
+      <dl class="fields">${[["collected", "מה עשינו"], ["decisions", "מה החלטנו"], ["blockers", "מה תקוע"], ["nextWeek", "לשבוע הבא"]].filter(([k]) => t[k]).map(([k, l]) => `<div><dt>${l}</dt><dd>${esc(t[k])}</dd></div>`).join("")}</dl>
+      ${(() => { const lk = state.data.tasks.filter(x => x.meetingId === t.id); return lk.length ? `<div class="linked"><span class="small muted" style="font-weight:700">משימות שיצאו מהפגישה</span>${lk.map(x => `<div class="meta"><span class="chip ${x.status === "done" ? "accent" : x.status === "doing" ? "sky" : ""}">${TASK_STATUS[x.status] || ""}</span><span>${esc(x.title)}</span><span class="muted">${esc(OWNERS[x.owner] || "")}${x.due ? " · " + fmtDate(x.due) : ""}</span></div>`).join("")}</div>` : ""; })()}
+      <div class="row-actions">${editBtn("talks", t.id)}${deleteBtn("talks", t.id)}</div></article>` : `
+    <article class="card"><div class="meta"><span class="chip ${t.kind === "customer" ? "warn" : ""}">${esc(TALK_KINDS[t.kind] || "")}</span><span class="num">${fmtDate(t.date)}</span>${t.problemId ? `<span>${esc(problemTitle(t.problemId))}</span>` : ""}<span>תיעד/ה: ${esc(t.createdBy || "")}</span></div>
+      <h3>${esc(t.withWhom)}${t.role ? ` <span class="muted small">· ${esc(t.role)}</span>` : ""}</h3>
+      <dl class="fields">${[["summary", "על מה דיברנו"], ["insights", "מה למדנו"], ["nextSteps", "צעדים הבאים"]].filter(([k]) => t[k]).map(([k, l]) => `<div><dt>${l}</dt><dd>${esc(t[k])}</dd></div>`).join("")}</dl>
+      <div class="row-actions">${editBtn("talks", t.id)}${deleteBtn("talks", t.id)}</div></article>`).join("")}</div>`
+    : `<div class="empty"><p>עוד אין כאן תיעוד. פגישה שבועית של שעה, באותו זמן כל שבוע, היא ההרגל הכי חשוב בשלב הזה.</p></div>`}`;
+}
+
+function viewTasks() {
+  const f = state.filters.tasks;
+  const list = state.data.tasks.filter(t => f === "all" || t.owner === f || t.owner === "both");
+  const today = todayISO();
+  const col = s => list.filter(t => (t.status || "todo") === s).sort((a, b) => (a.due || "9999").localeCompare(b.due || "9999"));
+  const fm = { all: "הכל" }; PEOPLE.forEach(p => fm[p] = p);
+  return `
+  <div class="view-head"><div><h1>משימות</h1><p class="lead">מי עושה מה, ועד מתי. כל משימה מהפגישה השבועית מקבלת כאן אחראי ותאריך.</p></div>
+    <div class="actions"><button type="button" class="btn primary" data-add="tasks">משימה חדשה</button></div></div>
+  ${filterBar("tasks", fm)}
+  <div class="kanban">${Object.entries(TASK_STATUS).map(([s, l]) => { const items = col(s); return `<section class="col"><h3><span>${l}</span><span class="num">${items.length}</span></h3>
+    ${items.length ? items.map(t => { const over = t.due && t.due < today && s !== "done"; return `<article class="card task${over ? " overdue" : ""}">
+      <div class="meta"><span class="chip">${esc(OWNERS[t.owner] || t.owner || "")}</span>${t.meetingId ? `<span class="chip sky">מהפגישה ${fmtDate(t.meetingDate)}</span>` : ""}${t.due ? `<span class="num${over ? "" : ""}" ${over ? 'style="color:var(--bad);font-weight:700"' : ""}>${over ? "באיחור · " : ""}${fmtDate(t.due)}</span>` : ""}</div>
+      <h3 style="${s === "done" ? "text-decoration:line-through;color:var(--muted)" : ""}">${esc(t.title)}</h3>${t.notes ? `<p class="small muted" style="white-space:pre-wrap">${esc(t.notes)}</p>` : ""}
+      <div class="row-actions">${Object.keys(TASK_STATUS).filter(k => k !== s).map(k => `<button type="button" class="btn small" data-tstatus="${esc(t.id)}" data-v="${k}">→ ${TASK_STATUS[k]}</button>`).join("")}${editBtn("tasks", t.id)}${deleteBtn("tasks", t.id)}</div></article>`; }).join("") : `<p class="muted small">אין.</p>`}</section>`; }).join("")}</div>`;
+}
+
+function viewLog() {
+  const list = state.data.log.slice().sort((a, b) => (b.date || "").localeCompare(a.date || "") || byNewest(a, b));
+  return `
+  <div class="view-head"><div><h1>יומן החלטות ולמידה</h1><p class="lead">כל החלטה משמעותית וכל לקח, עם הסיבה. כשתגיעו להסכם מייסדים ולגיוס, זה יהיה הזיכרון המשותף שלכם.</p></div>
+    <div class="actions"><button type="button" class="btn primary" data-add="log">רשומה חדשה</button></div></div>
+  ${list.length ? `<div class="timeline">${list.map(l => `<article class="card ${l.kind === "learning" ? "learning" : ""}">
+    <div class="meta"><span class="chip ${l.kind === "learning" ? "warn" : "accent"}">${LOG_KINDS[l.kind] || ""}</span><span class="num">${fmtDate(l.date)}</span>${l.problemId ? `<span>${esc(problemTitle(l.problemId))}</span>` : ""}<span>${esc(l.createdBy || "")}</span></div>
+    <h3>${esc(l.title)}</h3>${l.why ? `<p style="white-space:pre-wrap">${esc(l.why)}</p>` : ""}
+    <div class="row-actions">${editBtn("log", l.id)}${deleteBtn("log", l.id)}</div></article>`).join("")}</div>`
+    : `<div class="empty"><p>היומן ריק. החלטה ראשונה טובה: מתי נפגשים כל שבוע.</p></div>`}`;
+}
+
+const RENDER = { home: viewHome, problems: viewProblems, ideas: viewIdeas, research: viewResearch, talks: viewTalks, tasks: viewTasks, log: viewLog };
+
+function viewLogin() {
+  return `<section class="card" style="max-width:420px;margin:40px auto;gap:16px">
+    <h1>כניסה לחדר המייסדים</h1>
+    <p class="muted">הכניסה משותפת ל-Jose ול-Matan. אחרי הכניסה תבחרו מי אתם.</p>
+    <form id="login-form" novalidate>
+      <div class="field"><label for="l-email">מייל</label><input id="l-email" type="email" autocomplete="username" dir="ltr" required></div>
+      <div class="field"><label for="l-pass">סיסמה</label><input id="l-pass" type="password" autocomplete="current-password" dir="ltr" required></div>
+      <div class="form-err" id="l-err">${esc(state.loginErr)}</div>
+      <div class="form-actions"><button type="submit" class="btn primary">כניסה</button></div>
+    </form></section>`;
+}
+function render() {
+  if (state.user === undefined) { document.getElementById("tabs").innerHTML = ""; document.getElementById("me-btn").hidden = true; document.getElementById("view").innerHTML = `<p class="muted">טוען…</p>`; return; }
+  if (!state.user) { document.getElementById("tabs").innerHTML = ""; document.getElementById("me-btn").hidden = true; document.getElementById("out-btn").hidden = true; document.getElementById("view").innerHTML = viewLogin(); return; }
+  document.getElementById("me-btn").hidden = false; document.getElementById("out-btn").hidden = false;
+  const counts = { problems: problemsActive().length, tasks: state.data.tasks.filter(t => t.status !== "done").length };
+  document.getElementById("tabs").innerHTML = Object.entries(VIEWS).map(([k, v]) =>
+    `<a href="#${k}"${state.view === k ? ' aria-current="page"' : ""}>${v.label}${counts[k] ? `<span class="n">${counts[k]}</span>` : ""}</a>`).join("");
+  document.getElementById("me-btn").textContent = state.me ? state.me + " · החלפה" : "מי אני?";
+  let banner = "";
+  if (state.mode === "loading" && state.slow) banner = `<div class="banner">הנתונים עדיין לא נטענו. ייתכן שיש בעיית חיבור.</div>`;
+  else if (state.slow) banner = `<div class="banner">ייתכן שהנתונים לא מעודכנים. בודקים חיבור…</div>`;
+  if (state.readOnly) banner += `<div class="banner">השמירה נחסמה. נסו להתנתק ולהתחבר מחדש.</div>`;
+  const body = state.mode === "loading" && !state.loaded.size ? `<p class="muted">טוען…</p>` : RENDER[state.view]();
+  document.getElementById("view").innerHTML = banner + body;
+}
+
+/* ---------- events ---------- */
+const armed = new Map();
+document.addEventListener("click", async (e) => {
+  const t = e.target.closest("button,[data-close]");
+  if (!t) return;
+  if (t.hasAttribute("data-close")) { if (aiCtl) aiCtl.abort(); closeModal(); return; }
+  if (t.hasAttribute("data-delrow")) { const rows = t.closest(".task-rows"); if (rows.children.length > 1) t.closest(".task-row").remove(); else t.closest(".task-row").querySelectorAll("input").forEach(i => i.value = ""); return; }
+  if (t.id === "me-btn") { pickMe(); return; }
+  if (t.id === "out-btn") { await signOut(auth); return; }
+  const d = t.dataset;
+  try {
+    if (d.me) { state.me = d.me; lsSet("founders-me", d.me); closeModal(); render(); return; }
+    if (d.scale) { const inp = document.getElementById(d.scale); inp.value = d.v; t.parentElement.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
+    if (d.addrow) { document.getElementById(d.addrow).insertAdjacentHTML("beforeend", taskRowHTML()); document.getElementById(d.addrow).lastElementChild.querySelector("input").focus(); return; }
+    if (d.ai) { openAI(d.ai); return; }
+    if (d.filter) { state.filters[d.filter] = d.v; render(); return; }
+    if (d.add) { addOrEdit(d.add, null, d.preset); return; }
+    if (d.edit) { addOrEdit(d.edit, d.id); return; }
+    if (d.score) { openScore(d.score); return; }
+    if (d.status) {
+      const p = problemById(d.status); if (!p) return;
+      const doc = { ...p, status: d.v, updatedAt: Date.now() }; delete doc.id;
+      await saveDoc("problems", p.id, doc); return;
+    }
+    if (d.tstatus) {
+      const x = state.data.tasks.find(k => k.id === d.tstatus); if (!x) return;
+      const doc = { ...x, status: d.v, updatedAt: Date.now() }; delete doc.id;
+      await saveDoc("tasks", x.id, doc); return;
+    }
+    if (d.del) {
+      const key = d.del + "/" + d.id;
+      if (!armed.has(key)) {
+        t.classList.add("armed"); t.textContent = "ללחוץ שוב למחיקה";
+        armed.set(key, setTimeout(() => { armed.delete(key); t.classList.remove("armed"); t.textContent = "מחיקה"; }, 3500));
+        return;
+      }
+      clearTimeout(armed.get(key)); armed.delete(key);
+      await removeDoc(d.del, d.id);
+      if (d.del === "problems") for (const n of PEOPLE) { if (scoreOf(d.id, n)) await removeDoc("scores", d.id + "__" + n); }
+      return;
+    }
+  } catch (err) {
+    if (err && (err.code === "permission-denied" || err.code === "invalid_argument")) { state.readOnly = true; render(); }
+    else { const v = document.getElementById("view"); v.insertAdjacentHTML("afterbegin", `<div class="banner">${esc(errText(err))}</div>`); }
+  }
+});
+document.addEventListener("submit", async (e) => {
+  if (e.target.id !== "login-form") return;
+  e.preventDefault();
+  const email = document.getElementById("l-email").value.trim(), pass = document.getElementById("l-pass").value;
+  const errEl = document.getElementById("l-err"), btn = e.target.querySelector("button[type=submit]");
+  if (!email || !pass) { errEl.textContent = "צריך מייל וסיסמה."; return; }
+  btn.disabled = true; errEl.textContent = "";
+  try { await setPersistence(auth, browserLocalPersistence); await signInWithEmailAndPassword(auth, email, pass); }
+  catch (err) {
+    const c = err && err.code;
+    errEl.textContent = c === "auth/too-many-requests" ? "יותר מדי ניסיונות. חכו כמה דקות ונסו שוב." : c === "auth/network-request-failed" ? "אין חיבור לאינטרנט." : "המייל או הסיסמה שגויים.";
+    btn.disabled = false;
+  }
+});
+document.addEventListener("submit", (e) => { if (e.target.id === "m-form") { e.preventDefault(); if (currentSubmit) currentSubmit(); } });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !document.getElementById("modal").hidden && state.me) { if (aiCtl) aiCtl.abort(); closeModal(); } });
+
+function route() { const h = location.hash.slice(1); state.view = RENDER[h] ? h : "home"; render(); window.scrollTo(0, 0); }
+window.addEventListener("hashchange", route);
+
+/* ---------- boot ---------- */
+state.me = PEOPLE.includes(lsGet("founders-me")) ? lsGet("founders-me") : null;
+state.view = RENDER[location.hash.slice(1)] ? location.hash.slice(1) : "home";
+render();
+
+const SEED = {
+  "problems/example1": {"cluster":"הרשאות ואבטחה","cost":"כמה שעות בחודש, וסיכון אבטחה כשהרשאות נשארות פתוחות","createdAt":1794772600000,"createdBy":"Claude","example":true,"notes":"זו דוגמה לפורמט. אפשר למחוק אותה אחרי שמוסיפים בעיות אמיתיות.","source":"edge","status":"inbox","title":"מעקב אחרי הרשאות בענן","what":"לדעת מי קיבל גישה לאילו מערכות","when":"כשעובד עוזב או מחליף תפקיד","who":"מנהלי IT בחברות של 50–200 עובדים","workaround":"אקסל שמתעדכן ידנית ובדיקה פעם ברבעון"},
+  "tasks/t1": {"createdAt":1794772600000,"createdBy":"Claude","due":"2026-11-29","notes":"מכל 5 המקורות. בלי פתרונות.","owner":"Jose","status":"todo","title":"לאסוף 15 בעיות לתיבה"},
+  "tasks/t2": {"createdAt":1794772600001,"createdBy":"Claude","due":"2026-11-29","notes":"להתחיל ממה שלקוחות בחברת הסייבר התלוננו עליו, ממה שנעשה ידנית, ועל מה שילמו יותר מדי.","owner":"Matan","status":"todo","title":"לאסוף 15 בעיות לתיבה"},
+  "tasks/t3": {"createdAt":1794772600002,"createdBy":"Claude","due":"2026-11-18","notes":"שעה אחת בשבוע. לתעד את ההחלטה ביומן.","owner":"both","status":"todo","title":"לקבוע יום ושעה קבועים לפגישה שבועית"}
+};
+async function seedOnce() {
+  try {
+    const meta = doc(fdb, "meta", "seed");
+    const snap = await getDoc(meta);
+    if (snap.exists()) return;
+    const batch = writeBatch(fdb);
+    for (const [path, data] of Object.entries(SEED)) { const [c, id] = path.split("/"); batch.set(doc(fdb, c, id), data); }
+    batch.set(meta, { at: Date.now() });
+    await batch.commit();
+  } catch (e) { console.warn("seed skipped", e && e.code); }
+}
+
+let unsubs = [];
+function stopListening() { unsubs.forEach(u => u()); unsubs = []; COLS.forEach(c => state.data[c] = []); state.loaded = new Set(); }
+function startListening() {
+  state.mode = "live";
+  let timer = setTimeout(() => { state.slow = true; render(); }, 10000);
+  const confirmed = new Set();
+  COLS.forEach(c => {
+    unsubs.push(onSnapshot(collection(fdb, c), { includeMetadataChanges: false }, snap => {
+      state.data[c] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      state.loaded.add(c);
+      if (!snap.metadata.fromCache) confirmed.add(c);
+      if (confirmed.size === COLS.length && timer) { clearTimeout(timer); timer = null; state.slow = false; }
+      render();
+    }, err => {
+      state.loaded.add(c);
+      if (timer) { clearTimeout(timer); timer = null; }
+      if (err && err.code === "permission-denied") state.readOnly = true;
+      state.slow = true; render();
+    }));
+  });
+}
+onAuthStateChanged(auth, async (u) => {
+  stopListening();
+  state.user = u || null;
+  state.loginErr = "";
+  render();
+  if (u) {
+    startListening();
+    seedOnce();
+    if (!state.me) pickMe();
+  }
+});
+</script>
+</body>
+</html>
