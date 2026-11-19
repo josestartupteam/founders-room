@@ -2,7 +2,16 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141a1d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="חדר המייסדים">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>חדר המייסדים</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,21 +71,52 @@ a{color:var(--accent)}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
 
-header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.top-row{max-width:1000px;margin:0 auto;padding:14px 20px 6px;display:flex;align-items:center;gap:12px;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px}
-.mark{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--accent-soft),var(--sky-soft));display:grid;place-items:center;color:var(--accent);font-family:var(--display);font-weight:700;font-size:.95rem}
-.brand h1{font-size:1.12rem;font-weight:500}
-.brand .sub{color:var(--muted);font-size:.85rem}
-.me-btn{border:0;background:var(--surface);box-shadow:var(--shadow);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:600;font-size:.92rem}
-nav.tabs{max-width:1000px;margin:0 auto;padding:6px 16px 12px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
-nav.tabs::-webkit-scrollbar{display:none}
-nav.tabs a{flex:none;padding:6px 14px;text-decoration:none;color:var(--muted);font-weight:600;border-radius:999px;white-space:nowrap;font-size:.95rem}
-nav.tabs a:hover{color:var(--ink);background:var(--bg-2)}
-nav.tabs a[aria-current="page"]{color:var(--ink);background:var(--surface);box-shadow:var(--shadow)}
-nav.tabs a .n{font-size:.75rem;color:var(--muted);margin-inline-start:6px;font-variant-numeric:tabular-nums;background:var(--bg-2);border-radius:999px;padding:0 6px}
-
-main{max-width:1000px;margin:0 auto;padding:18px 20px 90px;display:flex;flex-direction:column;gap:22px}
+.app{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;padding:22px 14px 18px;display:flex;flex-direction:column;gap:22px;background:var(--surface);box-shadow:-1px 0 0 var(--line)}
+.brand{display:flex;align-items:center;gap:11px;padding:0 8px}
+.brand b{font-family:var(--display);font-weight:500;font-size:1.05rem;display:block}
+.brand .sub{color:var(--muted);font-size:.78rem}
+.mark{flex:none;width:34px;height:34px;border-radius:11px;background:linear-gradient(140deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#6aa7c9));display:grid;place-items:center;color:var(--accent-ink);font-family:var(--display);font-weight:700;font-size:1rem;box-shadow:0 4px 12px color-mix(in srgb,var(--accent) 30%,transparent)}
+.side-nav{display:flex;flex-direction:column;gap:2px}
+.side-nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--muted);font-weight:600}
+.side-nav a:hover{background:var(--bg);color:var(--ink)}
+.side-nav a[aria-current="page"]{background:var(--accent-soft);color:var(--ink)}
+.side-nav a[aria-current="page"] .ic{color:var(--accent)}
+.side-nav .n{margin-inline-start:auto;font-size:.75rem;background:var(--bg-2);border-radius:999px;padding:0 8px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line);padding-top:12px}
+.side-btn{display:flex;align-items:center;gap:12px;padding:9px 12px;border:0;background:transparent;border-radius:12px;cursor:pointer;color:var(--muted);font-weight:600;text-align:start}
+.side-btn:hover{background:var(--bg);color:var(--ink)}
+.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.content{min-width:0}
+.topbar{display:none}
+.bottom-nav,.fab{display:none}
+main{max-width:1000px;margin:0 auto;padding:30px 32px 60px;display:flex;flex-direction:column;gap:22px}
+.signed-out{grid-template-columns:1fr}
+.signed-out .side,.signed-out .topbar,.signed-out .bottom-nav,.signed-out .fab{display:none!important}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .topbar{display:flex;position:sticky;top:0;z-index:6;align-items:center;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+  .topbar .mark{width:30px;height:30px;font-size:.9rem;border-radius:10px}
+  .topbar b{font-family:var(--display);font-weight:500;font-size:1.08rem}
+  .top-actions{display:flex;gap:8px}
+  .round-btn{width:36px;height:36px;border-radius:50%;border:0;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center;cursor:pointer;color:var(--muted)}
+  .round-btn .ic{width:18px;height:18px}
+  .avatar{font-weight:700;color:var(--accent);font-family:var(--display)}
+  main{padding:8px 16px calc(110px + env(safe-area-inset-bottom));gap:18px}
+  .view-head h1{font-size:1.45rem}
+  .view-head .actions .btn.primary{display:none}
+  .bottom-nav{display:grid;grid-template-columns:repeat(7,1fr);position:fixed;bottom:0;inset-inline:0;z-index:7;padding:6px 4px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 -1px 0 var(--line)}
+  .bottom-nav a{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;text-decoration:none;color:var(--muted);font-size:.68rem;font-weight:600;border-radius:12px}
+  .bottom-nav a .ic{width:22px;height:22px}
+  .bottom-nav a[aria-current="page"]{color:var(--accent)}
+  .bottom-nav a[aria-current="page"] .ic{stroke-width:2.2}
+  .bottom-nav .dot{position:absolute;top:4px;inset-inline-end:calc(50% - 16px);width:7px;height:7px;border-radius:50%;background:var(--warn)}
+  .fab{display:grid;place-items:center;position:fixed;z-index:8;inset-inline-end:18px;bottom:calc(78px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:18px;border:0;cursor:pointer;background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 40%,transparent)}
+  .fab .ic{width:26px;height:26px;stroke-width:2.2}
+  #modal{align-items:flex-end;padding:0}
+  .sheet{border-radius:22px 22px 0 0;width:100%;max-height:92vh;overflow-y:auto;padding-bottom:calc(22px + env(safe-area-inset-bottom))}
+}
 .banner{border-radius:12px;padding:12px 16px;background:var(--warn-soft);color:var(--ink)}
 .view-head{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
 .view-head .lead{color:var(--muted);max-width:60ch;margin-top:6px}
@@ -125,7 +165,7 @@ main{max-width:1000px;margin:0 auto;padding:18px 20px 90px;display:flex;flex-dir
 .stage{font-size:.82rem;font-weight:700;color:var(--accent)}
 .funnel{display:flex;flex-direction:column;gap:10px}
 .f-row{display:grid;grid-template-columns:110px 1fr 36px;gap:12px;align-items:center}
-.f-bar{height:10px;background:var(--bg-2);border-radius:999px;overflow:hidden}
+.f-bar{height:10px;background:var(--bg-2);border-radius:999px;overflow:hidden;display:flex}
 .f-bar i{display:block;height:100%;background:var(--accent);border-radius:999px;min-width:0}
 .f-row b{font-variant-numeric:tabular-nums;font-weight:600}
 .goal{display:flex;flex-direction:column;gap:8px}
@@ -137,7 +177,7 @@ main{max-width:1000px;margin:0 auto;padding:18px 20px 90px;display:flex;flex-dir
 .score-badge{min-width:64px;text-align:center;border-radius:14px;padding:8px 10px;background:var(--accent-soft)}
 .score-badge .big{font-size:1.55rem}
 .score-badge small{display:block;color:var(--muted);font-size:.72rem;margin-top:2px}
-.crit{display:grid;grid-template-columns:minmax(100px,140px) repeat(2,minmax(0,110px));gap:6px 14px;font-size:.88rem;align-items:center;background:var(--bg);border-radius:12px;padding:12px 14px}
+.crit{display:grid;grid-template-columns:minmax(96px,140px) repeat(var(--n,3),minmax(0,100px));gap:6px 14px;font-size:.88rem;align-items:center;background:var(--bg);border-radius:12px;padding:12px 14px}
 .crit .h{color:var(--muted);font-size:.78rem;font-weight:700}
 .pips{display:flex;gap:3px}
 .pips i{width:13px;height:7px;border-radius:999px;background:var(--line)}
@@ -209,14 +249,25 @@ form{display:flex;flex-direction:column;gap:14px}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="top-row">
-    <div class="brand"><span class="mark" aria-hidden="true">ח</span><h1>חדר המייסדים</h1><span class="sub">Jose ו-Matan</span></div>
-    <div class="actions"><button class="me-btn" id="me-btn" type="button" hidden>מי אני?</button><button class="me-btn" id="out-btn" type="button" hidden>יציאה</button></div>
+<div class="app" id="app">
+  <aside class="side" aria-label="תפריט">
+    <div class="brand"><span class="mark" aria-hidden="true">ח</span><div><b>חדר המייסדים</b><span class="sub">Jose · Matan · Yonatan</span></div></div>
+    <nav class="side-nav" id="tabs" aria-label="מסכים"></nav>
+    <div class="side-foot">
+      <button class="side-btn" data-act="me" type="button"></button>
+      <button class="side-btn" data-act="out" type="button"></button>
+    </div>
+  </aside>
+  <div class="content">
+    <header class="topbar">
+      <div class="brand"><span class="mark" aria-hidden="true">ח</span><b id="top-title">חדר המייסדים</b></div>
+      <div class="top-actions"><button class="round-btn" data-act="me" type="button" aria-label="החלפת משתמש"></button><button class="round-btn" data-act="out" type="button" aria-label="יציאה"></button></div>
+    </header>
+    <main id="view"></main>
   </div>
-  <nav class="tabs" id="tabs" aria-label="מסכים"></nav>
-</header>
-<main id="view"></main>
+  <nav class="bottom-nav" id="btabs" aria-label="מסכים"></nav>
+  <button class="fab" id="fab" type="button" aria-label="הוספה"></button>
+</div>
 <div id="modal" hidden></div>
 
 <script type="module">
@@ -237,8 +288,8 @@ const auth = getAuth(fbApp);
 let fdb;
 try { fdb = initializeFirestore(fbApp, { localCache: persistentLocalCache() }); } catch (e) { fdb = initializeFirestore(fbApp, {}); }
 
-const PEOPLE = ["Jose", "Matan"];
-const OWNERS = { Jose: "Jose", Matan: "Matan", both: "שנינו" };
+const PEOPLE = ["Jose", "Matan", "Yonatan"];
+const OWNERS = { Jose: "Jose", Matan: "Matan", Yonatan: "Yonatan", both: "כולנו" };
 const SOURCES = { pain: "כאב אישי", edge: "יתרון לא הוגן", now: "למה עכשיו", spend: "איפה משלמים הרבה", copy: "מודל שעבד במקום אחר", other: "אחר" };
 const STATUS = { inbox: "בתיבה", short: "רשימה קצרה", top: "3 המובילות", dropped: "נפסלה" };
 const CRITERIA = [
@@ -257,14 +308,17 @@ const COLS = ["problems", "scores", "research", "talks", "tasks", "log"];
 const TARGET = 40;
 
 const VIEWS = {
-  home: { label: "סקירה" },
-  problems: { label: "תיבת בעיות", col: "problems" },
-  ideas: { label: "דירוג" },
-  research: { label: "מחקר", col: "research" },
-  talks: { label: "שיחות ופגישות", col: "talks" },
-  tasks: { label: "משימות", col: "tasks" },
-  log: { label: "יומן", col: "log" }
+  home: { label: "סקירה", short: "סקירה" },
+  problems: { label: "תיבת בעיות", short: "בעיות" },
+  ideas: { label: "דירוג", short: "דירוג" },
+  research: { label: "מחקר", short: "מחקר" },
+  talks: { label: "שיחות ופגישות", short: "שיחות" },
+  tasks: { label: "משימות", short: "משימות" },
+  log: { label: "יומן החלטות", short: "יומן" }
 };
+const ICONS = {"home": "<path d=\"M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z\"/>", "problems": "<path d=\"M22 12h-6l-2 3h-4l-2-3H2\"/><path d=\"M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z\"/>", "ideas": "<path d=\"m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z\"/>", "research": "<circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/>", "talks": "<path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"/>", "tasks": "<path d=\"m9 11 3 3L22 4\"/><path d=\"M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\"/>", "log": "<path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/>", "out": "<path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><path d=\"m16 17 5-5-5-5\"/><path d=\"M21 12H9\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21a8 8 0 0 1 16 0\"/>", "plus": "<path d=\"M12 5v14M5 12h14\"/>"};
+function icon(name) { return `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ""}</svg>`; }
+const FAB_ACTION = { home: ["problems"], problems: ["problems"], ideas: ["problems"], research: ["research"], talks: ["talks", "weekly"], tasks: ["tasks"], log: ["log"] };
 
 const state = {
   me: null,
@@ -308,9 +362,10 @@ function rankOf(p) {
   return t.length ? t.reduce((a, b) => a + b, 0) / t.length : null;
 }
 function gapsOf(pid) {
-  const a = scoreOf(pid, PEOPLE[0]), b = scoreOf(pid, PEOPLE[1]);
-  if (!a || !b) return [];
-  return CRITERIA.filter(([k]) => Math.abs((+a[k] || 0) - (+b[k] || 0)) >= 2).map(([k, l]) => `${l} (${PEOPLE[0]}: ${a[k]}, ${PEOPLE[1]}: ${b[k]})`);
+  const sc = PEOPLE.map(n => [n, scoreOf(pid, n)]).filter(([, s]) => s);
+  if (sc.length < 2) return [];
+  return CRITERIA.filter(([k]) => { const v = sc.map(([, s]) => +s[k] || 0); return Math.max(...v) - Math.min(...v) >= 2; })
+    .map(([k, l]) => `${l} (${sc.map(([n, s]) => `${n}: ${s[k]}`).join(", ")})`);
 }
 
 /* ---------- storage ---------- */
@@ -498,7 +553,7 @@ function openScore(pid) {
   const mine = scoreOf(pid, state.me) || {};
   openForm({
     title: "דירוג: " + p.title,
-    intro: `מדרג/ת כ-${esc(state.me)}. דרגו לבד, בלי להתייעץ. אחרי ששניכם מדרגים, הפערים הגדולים יופיעו ותוכלו לדבר עליהם.`,
+    intro: `מדרג/ת כ-${esc(state.me)}. דרגו לבד, בלי להתייעץ. אחרי שכולכם מדרגים, הפערים הגדולים יופיעו ותוכלו לדבר עליהם.`,
     fields: CRITERIA.map(([k, l, h]) => ({ id: k, label: l, type: "scale", hint: h, req: true })),
     values: mine,
     onSubmit: async (vals) => {
@@ -702,13 +757,13 @@ function problemCard(p) {
 function pips(v) { return `<span class="pips" aria-label="${v || 0} מתוך 5">${[1, 2, 3, 4, 5].map(n => `<i class="${n <= (+v || 0) ? "on" : ""}"></i>`).join("")}</span>`; }
 function viewIdeas() {
   const list = state.data.problems.filter(p => p.status !== "dropped").sort((a, b) => (rankOf(b) ?? -1) - (rankOf(a) ?? -1) || byNewest(a, b));
-  const other = PEOPLE.find(n => n !== state.me);
+  const others = PEOPLE.filter(n => n !== state.me);
   const pending = list.filter(p => !scoreOf(p.id, state.me)).length;
   return `
-  <div class="view-head"><div><h1>דירוג</h1><p class="lead">כל אחד מדרג לבד, מ-1 עד 5, לפי שישה קריטריונים. הציון של השותף נחשף רק אחרי שדירגת בעצמך, כדי שלא תושפעו זה מזה.</p></div>
+  <div class="view-head"><div><h1>דירוג</h1><p class="lead">כל אחד מדרג לבד, מ-1 עד 5, לפי שישה קריטריונים. הציונים של השותפים נחשפים רק אחרי שדירגת בעצמך, כדי שלא תושפעו זה מזה.</p></div>
     ${pending ? `<span class="chip warn">${pending} בעיות שעוד לא דירגת</span>` : ""}</div>
   ${list.length ? `<div class="list">${list.map(p => {
-    const mine = scoreOf(p.id, state.me), his = scoreOf(p.id, other);
+    const mine = scoreOf(p.id, state.me), othersScored = others.filter(n => scoreOf(p.id, n));
     const r = rankOf(p), gaps = gapsOf(p.id), st = p.status || "inbox";
     return `<article class="card">
       <div class="idea-top"><div style="display:flex;flex-direction:column;gap:6px">
@@ -717,9 +772,9 @@ function viewIdeas() {
         <h3>${esc(p.title)}</h3></div>
         ${mine && r != null ? `<div class="score-badge"><span class="big">${r.toFixed(1)}</span><small>ממוצע</small></div>` : ""}</div>
       ${statement(p)}
-      ${mine ? `<div class="crit"><span class="h">קריטריון</span>${PEOPLE.map(n => `<span class="h">${esc(n)}</span>`).join("")}
+      ${mine ? `<div class="crit" style="--n:${PEOPLE.length}"><span class="h">קריטריון</span>${PEOPLE.map(n => `<span class="h">${esc(n)}</span>`).join("")}
         ${CRITERIA.map(([k, l]) => `<span>${l}</span>${PEOPLE.map(n => { const s = scoreOf(p.id, n); return s ? pips(s[k]) : `<span class="muted small">—</span>`; }).join("")}`).join("")}</div>`
-        : his ? `<p class="small muted">${esc(other)} כבר דירג. דרג/י גם את/ה כדי לראות.</p>` : ""}
+        : othersScored.length ? `<p class="small muted">${esc(othersScored.join(" ו-"))} כבר ${othersScored.length > 1 ? "דירגו" : "דירג"}. דרג/י גם את/ה כדי לראות.</p>` : ""}
       ${mine && gaps.length ? `<div class="gap-note"><b>פער גדול ביניכם:</b> ${gaps.map(esc).join(" · ")}. כדאי לדבר על זה בפגישה השבועית.</div>` : ""}
       <div class="row-actions"><button type="button" class="btn small ${mine ? "" : "primary"}" data-score="${esc(p.id)}">${mine ? "עדכון הדירוג שלי" : "לדרג"}</button>
         ${st !== "short" ? `<button type="button" class="btn small" data-status="${esc(p.id)}" data-v="short">→ רשימה קצרה</button>` : ""}
@@ -808,7 +863,7 @@ const RENDER = { home: viewHome, problems: viewProblems, ideas: viewIdeas, resea
 function viewLogin() {
   return `<section class="card" style="max-width:420px;margin:40px auto;gap:16px">
     <h1>כניסה לחדר המייסדים</h1>
-    <p class="muted">הכניסה משותפת ל-Jose ול-Matan. אחרי הכניסה תבחרו מי אתם.</p>
+    <p class="muted">הכניסה משותפת ל-Jose, Matan ו-Yonatan. אחרי הכניסה תבחרו מי אתם.</p>
     <form id="login-form" novalidate>
       <div class="field"><label for="l-email">מייל</label><input id="l-email" type="email" autocomplete="username" dir="ltr" required></div>
       <div class="field"><label for="l-pass">סיסמה</label><input id="l-pass" type="password" autocomplete="current-password" dir="ltr" required></div>
@@ -817,13 +872,24 @@ function viewLogin() {
     </form></section>`;
 }
 function render() {
-  if (state.user === undefined) { document.getElementById("tabs").innerHTML = ""; document.getElementById("me-btn").hidden = true; document.getElementById("view").innerHTML = `<p class="muted">טוען…</p>`; return; }
-  if (!state.user) { document.getElementById("tabs").innerHTML = ""; document.getElementById("me-btn").hidden = true; document.getElementById("out-btn").hidden = true; document.getElementById("view").innerHTML = viewLogin(); return; }
-  document.getElementById("me-btn").hidden = false; document.getElementById("out-btn").hidden = false;
+  const appEl = document.getElementById("app");
+  if (!state.user) {
+    appEl.classList.add("signed-out");
+    document.getElementById("view").innerHTML = state.user === undefined ? `<p class="muted" style="padding:40px;text-align:center">טוען…</p>` : viewLogin();
+    return;
+  }
+  appEl.classList.remove("signed-out");
   const counts = { problems: problemsActive().length, tasks: state.data.tasks.filter(t => t.status !== "done").length };
+  const cur = k => state.view === k ? ' aria-current="page"' : "";
   document.getElementById("tabs").innerHTML = Object.entries(VIEWS).map(([k, v]) =>
-    `<a href="#${k}"${state.view === k ? ' aria-current="page"' : ""}>${v.label}${counts[k] ? `<span class="n">${counts[k]}</span>` : ""}</a>`).join("");
-  document.getElementById("me-btn").textContent = state.me ? state.me + " · החלפה" : "מי אני?";
+    `<a href="#${k}"${cur(k)}>${icon(k)}<span>${v.label}</span>${counts[k] ? `<span class="n">${counts[k]}</span>` : ""}</a>`).join("");
+  document.getElementById("btabs").innerHTML = Object.entries(VIEWS).map(([k, v]) =>
+    `<a href="#${k}"${cur(k)}>${icon(k)}<span>${v.short}</span>${counts[k] && k === "tasks" ? `<i class="dot" aria-hidden="true"></i>` : ""}</a>`).join("");
+  document.querySelectorAll('.side-btn[data-act="me"]').forEach(b => b.innerHTML = `${icon("user")}<span>${state.me ? esc(state.me) + " · החלפה" : "מי אני?"}</span>`);
+  document.querySelectorAll('.side-btn[data-act="out"]').forEach(b => b.innerHTML = `${icon("out")}<span>יציאה</span>`);
+  document.querySelectorAll('.round-btn[data-act="me"]').forEach(b => b.innerHTML = state.me ? `<span class="avatar">${esc(state.me[0])}</span>` : icon("user"));
+  document.querySelectorAll('.round-btn[data-act="out"]').forEach(b => b.innerHTML = icon("out"));
+  document.getElementById("fab").innerHTML = icon("plus");
   let banner = "";
   if (state.mode === "loading" && state.slow) banner = `<div class="banner">הנתונים עדיין לא נטענו. ייתכן שיש בעיית חיבור.</div>`;
   else if (state.slow) banner = `<div class="banner">ייתכן שהנתונים לא מעודכנים. בודקים חיבור…</div>`;
@@ -839,8 +905,9 @@ document.addEventListener("click", async (e) => {
   if (!t) return;
   if (t.hasAttribute("data-close")) { if (aiCtl) aiCtl.abort(); closeModal(); return; }
   if (t.hasAttribute("data-delrow")) { const rows = t.closest(".task-rows"); if (rows.children.length > 1) t.closest(".task-row").remove(); else t.closest(".task-row").querySelectorAll("input").forEach(i => i.value = ""); return; }
-  if (t.id === "me-btn") { pickMe(); return; }
-  if (t.id === "out-btn") { await signOut(auth); return; }
+  if (t.dataset.act === "me") { pickMe(); return; }
+  if (t.dataset.act === "out") { await signOut(auth); return; }
+  if (t.id === "fab") { const [c, p] = FAB_ACTION[state.view] || ["problems"]; addOrEdit(c, null, p); return; }
   const d = t.dataset;
   try {
     if (d.me) { state.me = d.me; lsSet("founders-me", d.me); closeModal(); render(); return; }
@@ -928,7 +995,7 @@ function startListening() {
   let timer = setTimeout(() => { state.slow = true; render(); }, 10000);
   const confirmed = new Set();
   COLS.forEach(c => {
-    unsubs.push(onSnapshot(collection(fdb, c), { includeMetadataChanges: false }, snap => {
+    unsubs.push(onSnapshot(collection(fdb, c), { includeMetadataChanges: true }, snap => {
       state.data[c] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       state.loaded.add(c);
       if (!snap.metadata.fromCache) confirmed.add(c);
